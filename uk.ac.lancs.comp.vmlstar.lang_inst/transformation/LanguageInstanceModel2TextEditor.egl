@@ -1,0 +1,63 @@
+[%
+  var lim := LIM!LangInstModel.all().first();
+  var VMLName: String := lim.name;
+%]
+
+package uk.ac.lancs.comp.vml.[%= VMLName.firstToLowerCase()%];
+
+import hub.sam.tef.semantics.DefaultIdentificationScheme;
+import hub.sam.tef.semantics.DefaultSemanticsProvider;
+import hub.sam.tef.semantics.IPropertyResolutionSemantics;
+import hub.sam.tef.semantics.ISemanticsProvider;
+import hub.sam.tef.tsl.ReferenceBinding;
+
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EPackage;
+import org.osgi.framework.Bundle;
+
+import uk.ac.lancs.comp.vml.[%= VMLName.firstToLowerCase()%].model.[%= VMLName.firstToLowerCase()%].[%= VMLName%]Package;
+import uk.ac.lancs.comp.vml.[%= VMLName.firstToLowerCase()%].model.[%= VMLName.firstToLowerCase()%].provider.[%= VMLName%]ItemProviderAdapterFactory;
+
+public class TextEditor extends hub.sam.tef.editor.text.TextEditor {
+
+	@Override
+	public EPackage[] createMetaModelPackages() {
+		return new EPackage[] {
+		  [%= VMLName%]Package.eINSTANCE
+		};
+	}
+
+	@Override
+	protected Bundle getPluginBundle() {
+		return Platform.getBundle("uk.ac.lancs.comp.vml.[%= VMLName.firstToLowerCase()%]");
+	}
+
+	@Override
+	protected String getSyntaxPath() {
+		return "resources/[%= VMLName%].etslt";
+	}
+
+	@Override
+	public AdapterFactory[] createItemProviderAdapterFactories() {
+		return new AdapterFactory[] { new [%= VMLName%]ItemProviderAdapterFactory() };
+	}
+	
+    @Override
+    protected ISemanticsProvider createSemanticsProvider() {
+        return new DefaultSemanticsProvider(
+                DefaultIdentificationScheme.INSTANCE) {
+            @Override
+            public IPropertyResolutionSemantics getPropertyResolutionSemantics(
+                    ReferenceBinding binding) {
+                if (binding.getProperty().getEType().equals(
+                        [%= VMLName%]Package.eINSTANCE.getFeature())) {
+                    return new FeatureReferenceResolutionSemantics(
+                            DefaultIdentificationScheme.INSTANCE);
+                } else {
+                    return super.getPropertyResolutionSemantics(binding);
+                }
+            }
+        };
+    }	
+}

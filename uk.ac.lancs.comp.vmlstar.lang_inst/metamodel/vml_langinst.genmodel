@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/uk.ac.lancs.comp.vmlstar.lang_inst.model/src"
+    modelPluginID="uk.ac.lancs.comp.vmlstar.lang_inst.model" modelName="Vml_langinst"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>vml_langinst.ecore</foreignModel>
+  <genPackages prefix="VmlLangInst" basePackage="uk.ac.lancs.comp" disposableProviderFactory="true"
+      ecorePackage="vml_langinst.ecore#/">
+    <genClasses ecoreClass="vml_langinst.ecore#//LangInstModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//LangInstModel/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml_langinst.ecore#//LangInstModel/fma"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml_langinst.ecore#//LangInstModel/cma"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml_langinst.ecore#//LangInstModel/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml_langinst.ecore#//LangInstModel/designators"/>
+    </genClasses>
+    <genClasses ecoreClass="vml_langinst.ecore#//FeatureModelAdapter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//FeatureModelAdapter/adapterClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//FeatureModelAdapter/adapterOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="vml_langinst.ecore#//CoreModelAdapter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//CoreModelAdapter/adapterClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//CoreModelAdapter/adapterOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="vml_langinst.ecore#//ActionDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//ActionDescriptor/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//ActionDescriptor/evaluatorClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//ActionDescriptor/evaluatorMethod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//ActionDescriptor/checkMethod"/>
+    </genClasses>
+    <genClasses ecoreClass="vml_langinst.ecore#//DesignatorDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//DesignatorDescriptor/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//DesignatorDescriptor/numParams"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//DesignatorDescriptor/evaluatorClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//DesignatorDescriptor/evaluatorMethod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml_langinst.ecore#//DesignatorDescriptor/checkMethod"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

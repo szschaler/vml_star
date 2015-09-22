@@ -1,0 +1,60 @@
+syntax(VmlModel) "resources/vml.ecore" {
+	VmlModel:element(VmlModel) ->
+		FeatureImport:composite(features)
+		CoreModelImport:composite(coreModel)
+		(ConcernSpec:composite(concerns))* ; 
+	
+	FeatureImport:element(FeatureModelRef) ->
+		"import" ws(space) "features" ws(space) "<" IDENTIFIER:composite(fmURI)">" ws(empty) ";";
+	
+	CoreModelImport:element(CoreModelRef) ->
+		"import" ws(space) "core" ws(space) "<" IDENTIFIER:composite(coreURI) ">" ws(empty) ";";
+	
+	ConcernSpec:element(Concern) ->
+		"concern" ws(space) IDENTIFIER:composite(name) "{" ws(empty)
+			(ConcernElement ws(space))+ 
+		ws(empty) "}" ;
+	
+	ConcernElement -> ConcernSpec:composite(subConcerns);
+	ConcernElement -> VariantSpec:composite(variants);
+	ConcernElement -> PointCutSpec:composite(pointcuts);
+	
+	VariantSpec:element(Variant) ->
+		"variant" ws(space) IDENTIFIER:reference(feature) ws(space) "{" ws(empty) 
+			("SELECT:" ws(space) (ActionSpec:composite(onSelect) ws(empty) ";" ws(space))+)?
+			("UNSELECT:" ws(space) (ActionSpec:composite(onUnSelect) ws(empty) ";" ws(space))+)?
+		ws(empty) "}";
+
+	// These options to be generated for each language instance
+    //ActionSpec -> AddActionSpec;
+    //ActionSpec -> RemoveActionSpec;
+    //ActionSpec -> ConnectActionSpec;
+    //ActionSpec -> MergeActionSpec;
+    
+    AddActionSpec:element(AddAction) -> 
+    	"add" ws(space) "(" ws(empty) PointCutReferenceSpec:composite(parameters) ws(empty) ":" ws(empty) PointCutExpressionSpec:composite(parameters) ws(empty) ")" ;
+	
+	PointCutReferenceSpec:element(PointCutReference) ->
+		IDENTIFIER:reference(pc) ;
+		
+	PointCutSpec:element(PointCut) ->
+		"pointcut" ws(space) IDENTIFIER:composite(name) ws(space) "{" ws(empty) PointCutExpressionSpec:composite(pce) ws(empty) "}" ;
+		
+	PointCutExpressionSpec -> PCDesignatorSpec ;
+	PointCutExpressionSpec -> PCEOperatorSpec ;
+
+	PCEOperatorSpec -> PCEAndOperatorSpec ;
+	PCEOperatorSpec -> PCEOrOperatorSpec ;
+	
+	PCEAndOperatorSpec:element(PCEAndOperator) ->
+		"and" ws(space) "(" ws(empty) PointCutExpressionSpec:composite(operands) ("," PointCutExpressionSpec:composite(operands))+ ws(empty) ")" ;	
+
+	PCEOrOperatorSpec:element(PCEOrOperator) ->
+		"or" ws(space) "(" ws(empty) PointCutExpressionSpec:composite(operands) ("," PointCutExpressionSpec:composite(operands))+ ws(empty) ")" ;	
+
+	// These alternatives to be generated for each language instance
+	//PCDesignatorSpec -> PCDComponentSpec ;
+
+	//PCDComponentSpec:element(PCComponentDesignator) ->
+	//	"component" ws(space) "(" ws(empty) IDENTIFIER:composite(fullyQualifiedName) ws(empty) ")";
+}	

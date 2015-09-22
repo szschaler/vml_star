@@ -1,0 +1,37 @@
+syntax(LangInstModel) "metamodel/vml_langinst.ecore" {
+	LangInstModel:element(LangInstModel) ->
+	   "vml" ws(space) "instance" IDENTIFIER:composite(name) ws(space) "{" ws(empty)
+	       FeatureModelAdapter:composite(fma) ws(space)
+	       CoreModelAdapter:composite(cma) ws(space)
+	       "actions" ":" (ws(space) ActionDescriptor:composite(actions))+ ws(space)
+	       "designators" ":" (ws(space) DesignatorDescriptor:composite(designators))+
+	   ws(empty) "}" ;
+	   
+    FeatureModelAdapter:element(FeatureModelAdapter) ->
+        "features" "{"
+            "class" STRINGDEF:composite(adapterClass) 
+            "operation" IDENTIFIER:composite(adapterOperation) 
+        "}" ;
+
+    CoreModelAdapter:element(CoreModelAdapter) -> 
+        "core" "model" "{" 
+            "class" STRINGDEF:composite(adapterClass) 
+            "operation" IDENTIFIER:composite(adapterOperation)
+        "}" ;
+
+    ActionDescriptor:element(ActionDescriptor) ->
+        IDENTIFIER:composite(name) "{"
+            "params" INTEGER:composite(numParams)
+            "class" STRINGDEF:composite(evaluatorClass)
+            "eval"  IDENTIFIER:composite(evaluatorMethod)
+            "check" IDENTIFIER:composite(checkMethod)
+        "}" ;
+
+    DesignatorDescriptor:element(DesignatorDescriptor) ->
+        IDENTIFIER:composite(name) "{"
+            "params" INTEGER:composite(numParams)
+            "class" STRINGDEF:composite(evaluatorClass)
+            "eval"  IDENTIFIER:composite(evaluatorMethod)
+            "check" IDENTIFIER:composite(checkMethod)
+        "}" ;
+}

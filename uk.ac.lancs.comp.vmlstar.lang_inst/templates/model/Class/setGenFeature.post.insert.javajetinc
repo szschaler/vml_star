@@ -1,0 +1,4 @@
+<%if (genFeature.getEcoreFeature().getName().equals ("fmURI") &&
+      genClass.getEcoreClass().getName().equals("FeatureModelRef")) {%>
+    initializeFeatureList();
+<%}%>

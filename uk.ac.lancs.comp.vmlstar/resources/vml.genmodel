@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/uk.ac.lancs.comp.vmlstar/src"
+    editDirectory="/uk.ac.lancs.comp.vmlstar/src" modelPluginID="uk.ac.lancs.comp.vmlstar"
+    modelName="Vml" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>vml.ecore</foreignModel>
+  <genPackages prefix="Vmlstar" basePackage="uk.ac.lancs.comp.vmlstar.model" disposableProviderFactory="true"
+      ecorePackage="vml.ecore#/">
+    <genClasses ecoreClass="vml.ecore#//VmlModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//VmlModel/features"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//VmlModel/coreModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//VmlModel/concerns"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//FeatureModelRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//FeatureModelRef/features"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//FeatureModelRef/fmURI"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//Feature/name"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//CoreModelRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//CoreModelRef/elements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//CoreModelRef/coreURI"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//Concern">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//Concern/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Concern/subConcerns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Concern/variants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Concern/pointcuts"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//Variant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Variant/onSelect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Variant/onUnSelect"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vml.ecore#//Variant/feature"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vml.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//Action/parameters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vml.ecore#//ElementReference">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference vml.ecore#//ElementReference/referencedElements"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//PointCutReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vml.ecore#//PointCutReference/pc"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//PointCut">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//PointCut/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//PointCut/pce"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vml.ecore#//PointCutExpression"/>
+    <genClasses image="false" ecoreClass="vml.ecore#//PCEOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vml.ecore#//PCEOperator/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="vml.ecore#//PCEAndOperator"/>
+    <genClasses ecoreClass="vml.ecore#//PCEOrOperator"/>
+    <genClasses image="false" ecoreClass="vml.ecore#//PCDesignator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vml.ecore#//PCDesignator/parameters"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,69 @@
+@namespace(uri="http://uk.ac.lancs.comp/vmlstar", prefix="vmlstar")
+package vmlstar;
+
+class VmlModel {
+  val FeatureModelRef features;
+  val CoreModelRef coreModel;
+  val Concern[*] concerns;
+}
+
+class FeatureModelRef {
+  readonly derived val Feature[*] features;
+  attr String fmURI;
+}
+
+class Feature {
+  attr String name;
+}
+
+class CoreModelRef {
+  readonly derived val EObject[*] elements;
+  attr String coreURI;
+}
+
+class Concern {
+  attr String name;
+  val Concern[*] subConcerns;
+  val Variant[*] variants;
+  val PointCut[*] pointcuts;
+}
+
+class Variant {
+  val Action[*] onSelect;
+  val Action[*] onUnSelect;
+  ref Feature feature;
+}
+
+abstract class Action {
+  val ElementReference[*] parameters;
+}
+
+abstract class ElementReference {
+  readonly derived ref EObject[*] referencedElements;
+}
+
+class PointCutReference extends ElementReference {
+  ref PointCut pc;
+}
+
+class PointCut {
+  attr String name;
+  val PointCutExpression pce;
+}
+
+abstract class PointCutExpression extends ElementReference {
+}
+
+abstract class PCEOperator extends PointCutExpression {
+  val PointCutExpression[*] operands;
+}
+
+class PCEAndOperator extends PCEOperator {
+}
+
+class PCEOrOperator extends PCEOperator {
+}
+
+abstract class PCDesignator extends PointCutExpression {
+  attr String[*] parameters;
+}

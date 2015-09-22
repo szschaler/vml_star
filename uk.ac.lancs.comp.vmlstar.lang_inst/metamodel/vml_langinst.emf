@@ -1,0 +1,61 @@
+@namespace(uri="http://uk.ac.lancs.comp/vmlstar.lang_inst", prefix="vmlstar.lang_inst")
+package vmlLangInst;
+
+@comment("A model to describe a language extension for VML*")
+class LangInstModel {
+  attr String name;
+  val FeatureModelAdapter fma;
+  val CoreModelAdapter cma;
+  val ActionDescriptor[*] actions;
+  val DesignatorDescriptor[*] designators;
+}
+
+@comment("References an operation to use in determining the set of features for a given reference")
+class FeatureModelAdapter {
+  @comment("Name of the class containing the operaton")
+  attr String adapterClass;
+  @comment("Name of the operation. This operation must have the following signature:
+            Feature[*] getFeatures (String uri);")
+  attr String adapterOperation;
+}
+
+@comment("References an operation to use in determining the set of model elements for a given reference")
+class CoreModelAdapter {
+  @comment("Name of the class containing the operaton")
+  attr String adapterClass;
+  @comment("Name of the operation. This operation must have the following signature:
+            EObject[*] getModelElements (String uri);")
+  attr String adapterOperation;
+}
+
+@comment("Describes a custom action")
+class ActionDescriptor {
+  @comment("The name of the action. This will be used to invoke the action from a VML script.")
+  attr String name;
+  @comment("Number of parameters the action takes.")
+  attr int numParams;
+  @comment("A class containing methods for executing the action and checking type-safety constraints.")
+  attr String evaluatorClass;
+  @comment("Name of an operation implementing evaluation of the action. This must have the following signature:
+            void invoke (ElementReference[*] parameters)")
+  attr String evaluatorMethod;
+  @comment("Name of an operation implementing type checking of the action's parameters. This must have the following signature:
+            boolean checkParameters (ElementReference[*] parameters)")
+  attr String checkMethod;
+}
+
+@comment("Describes a custom designator")
+class DesignatorDescriptor {
+  @comment("The name of the designator. This will be used to invoke the designator from a VML script.")
+  attr String name;
+  @comment("Number of parameters the designator takes.")
+  attr int numParams;
+  @comment("A class containing methods for evaluating the designator and checking type-safety constraints.")
+  attr String evaluatorClass;
+  @comment("Name of an operation implementing evaluation of the designator. This must have the following signature:
+            ElementReference[*] evaluate (CoreModelRef core, String[*] parameters)")
+  attr String evaluatorMethod;
+  @comment("Name of an operation implementing type checking of the designator's parameters. This must have the following signature:
+            boolean checkParameters (CoreModelRef core, String[*] parameters)")
+  attr String checkMethod;
+}

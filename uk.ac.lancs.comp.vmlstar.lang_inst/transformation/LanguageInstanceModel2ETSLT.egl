@@ -1,0 +1,75 @@
+[%
+  var lim := LIM!LangInstModel.all().first();
+  var VMLName: String := lim.name;
+%]
+
+syntax([%= VMLName%]Model) "resources/[%= VMLName%].ecore" {
+	[%= VMLName%]Model:element(VmlModel) ->
+		FeatureImport:composite(features)
+		CoreModelImport:composite(coreModel)
+		(ConcernSpec:composite(concerns))* ; 
+	
+	FeatureImport:element(FeatureModelRef) ->
+		"import" ws(space) "features" ws(space) "<" IDENTIFIER:composite(fmURI)">" ws(empty) ";";
+	
+	CoreModelImport:element(CoreModelRef) ->
+		"import" ws(space) "core" ws(space) "<" IDENTIFIER:composite(coreURI) ">" ws(empty) ";";
+	
+	ConcernSpec:element(Concern) ->
+		"concern" ws(space) IDENTIFIER:composite(name) "{" ws(empty)
+			(ConcernElement ws(space))+ 
+		ws(empty) "}" ;
+	
+	ConcernElement -> ConcernSpec:composite(subConcerns);
+	ConcernElement -> VariantSpec:composite(variants);
+	ConcernElement -> PointCutSpec:composite(pointcuts);
+	
+	VariantSpec:element(Variant) ->
+		"variant" ws(space) IDENTIFIER:reference(feature) ws(space) "{" ws(empty) 
+			("SELECT:" ws(space) (ActionSpec:composite(onSelect) ws(empty) ";" ws(space))+)?
+			("UNSELECT:" ws(space) (ActionSpec:composite(onUnSelect) ws(empty) ";" ws(space))+)?
+		ws(empty) "}";
+
+	PointCutReferenceSpec:element(PointCutReference) ->
+		IDENTIFIER:reference(pc) ;
+		
+	PointCutSpec:element(PointCut) ->
+		"pointcut" ws(space) IDENTIFIER:composite(name) ws(space) "{" ws(empty) PointCutExpressionSpec:composite(pce) ws(empty) "}" ;
+		
+	PointCutExpressionSpec -> PCDesignatorSpec ;
+	PointCutExpressionSpec -> PCEOperatorSpec ;
+
+	PCEOperatorSpec -> PCEAndOperatorSpec ;
+	PCEOperatorSpec -> PCEOrOperatorSpec ;
+	
+	PCEAndOperatorSpec:element(PCEAndOperator) ->
+		"and" ws(space) "(" ws(empty) PointCutExpressionSpec:composite(operands) ("," PointCutExpressionSpec:composite(operands))+ ws(empty) ")" ;	
+
+	PCEOrOperatorSpec:element(PCEOrOperator) ->
+		"or" ws(space) "(" ws(empty) PointCutExpressionSpec:composite(operands) ("," PointCutExpressionSpec:composite(operands))+ ws(empty) ")" ;	
+
+    ElementReferenceSpec -> PointCutExpressionSpec;
+    ElementReferenceSpec -> PointCutReferenceSpec;
+
+    [%for (ad in LIM!ActionDescriptor.all()) {%]
+      ActionSpec -> [%=ad.name.firstToUpperCase()%]ActionSpec;      
+      [%=ad.name.firstToUpperCase()%]ActionSpec:element([%=ad.name.firstToUpperCase()%]Action) ->
+          "[%=ad.name%]" ws(space) "(" ws(empty) 
+            [%for (i in Sequence{1..ad.numParams}) {%]
+              [%if (i > 1) {%] ws(empty) "," ws(space) [%}%]
+              ElementReferenceSpec:composite(parameters)
+            [%}%]
+          ws(empty) ")" ;
+    [%}%]
+
+    [%for (dd in LIM!DesignatorDescriptor.all()) {%]
+      PCDesignatorSpec -> [%=dd.name.firstToUpperCase()%]DesignatorSpec;      
+      [%=dd.name.firstToUpperCase()%]DesignatorSpec:element([%=dd.name.firstToUpperCase()%]Designator) ->
+          "[%=dd.name%]" ws(space) "(" ws(empty) 
+            [%for (i in Sequence{1..dd.numParams}) {%]
+              [%if (i > 1) {%] ws(empty) "," ws(space) [%}%]
+              STRINGDEF:composite(parameters)
+            [%}%]
+          ws(empty) ")" ;
+    [%}%]
+}

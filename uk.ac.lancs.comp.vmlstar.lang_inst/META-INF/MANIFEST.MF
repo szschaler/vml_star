@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lang_inst Plug-in
+Bundle-SymbolicName: uk.ac.lancs.comp.vmlstar.lang_inst;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: uk.ac.lancs.comp.vmlstar.lang_inst.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ hub.sam.tef,
+ uk.ac.lancs.comp.vmlstar.lang_inst.model,
+ uk.ac.lancs.comp.vmlstar.lang_inst.model.edit,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.epsilon.etl.engine,
+ org.eclipse.epsilon.erl.engine,
+ org.eclipse.epsilon.eol.engine,
+ org.eclipse.epsilon.emc.emf,
+ uk.ac.lancs.comp.vmlstar,
+ org.eclipse.emf.codegen,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.codegen.ecore.ui,
+ org.eclipse.emf.codegen.ui,
+ org.eclipse.epsilon.egl.engine;bundle-version="0.8.1"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,0 +1,39 @@
+<%if (isImplementation && 
+      genClass.getEcoreClass().getName().equals("FeatureModelRef")) {%>
+  /**
+   * Helper method initialising feature list based on feature importer provided
+   * on definition of the VML instance.
+   *
+   * @generated
+   */
+  private void initializeFeatureList() {
+    // TODO: First possibly need to remove all of these features completely from the model. 
+    EList<Feature> flFeatures = getFeatures();
+    flFeatures.clear();
+      <%
+      org.eclipse.emf.ecore.EClass ecFMR = genClass.getEcoreClass();
+      org.eclipse.emf.ecore.EAnnotation ea = ecFMR.getEAnnotation ("vml.actionSemantics");
+      String sClassName = null;
+      String sOpName = null;
+      for (Map.Entry me: ea.getDetails()) {
+        if (me.getKey().equals("class")) {
+          sClassName = (String) me.getValue();
+        } else {
+          sOpName = (String) me.getValue();
+        }
+      }
+      String sImportedClassName = genModel.getImportedName (sClassName);
+     %>
+    try {
+      <%=sImportedClassName%> featureImporter = new <%=sImportedClassName%>();
+      for (String sFeatureName: featureImporter.getFeatures(getFmURI())) {
+        Feature fFeature = <%=genModel.getImportedName (genPackage.getReflectionPackageName() + "." + genPackage.getFactoryInterfaceName())%>.eINSTANCE.createFeature();
+        fFeature.setName(sFeatureName);
+        flFeatures.add(fFeature);
+      }
+    }
+    catch (Exception e) {
+      e.printStackTrace();      
+    }
+  }
+<%}%>
