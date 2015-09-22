@@ -1,2 +1,11 @@
-# vml_star
-VML* Sources
+# VML*
+
+VML* is a language for generating product models in model-driven software product lines. More precisely, VML* is itself a product line of such languages, as the first step is generating a VML* language specific to your modelling language of choice. More information can be found in our respective papers:
+
+**Steffen Zschaler**, Pablo Sánchez, Joao Santos, Mauricio Alférez, Awais Rashid, Lidia Fuentes, Ana Moreira, Joao Araujo, and Uirá Kulesza: _VML* -- A Family of Languages for Variability Management in Software Product Lines._ Mark van den Brand, Dragan Gasevic, and Jeff Gray (eds.): Software Language Engineering, 2nd Int'l Conf. (SLE 2009), Revised Selected Papers. LNCS 5969, Springer, 2010.
+<a href="http://www.steffen-zschaler.de/download.php?type=pdf&id=61" target="_blank">[pdf (The original publication is available at www.springerlink.com.)]</a><a href="http://www.steffen-zschaler.de/slides/vmlstar.pptx" target="_blank">[slides]</a><a href="http://www.steffen-zschaler.de/download.php?type=http&id=61" target="_blank">[http]</a><a href="http://www.steffen-zschaler.de/publications/vmlstar/">[additional material]</a>
+
+Florian Heidenreich, Pablo Sanchez, Joao Santos, **Steffen Zschaler**, Mauricio Alferez, Joao Araujo, Lidia Fuentes, Uira Kulesza, Ana Moreira, and Awais Rashid: _Relating Feature Models to Other Models of a Software Product Line: A Comparative Study of FeatureMapper and VML*._ Shmuel Katz, Joerg Kienzle (ed): Transactions on Aspect-Oriented Software Development VII, Special Issue on A Common Case Study for Aspect-Oriented Modeling. LNCS 6210, pp. 69--114, Springer, 2010.
+<a href="http://www.steffen-zschaler.de/download.php?type=pdf&id=65" target="_blank">[pdf ((c) Springer Verlag)]</a><a href="http://www.steffen-zschaler.de/download.php?type=http&id=65" target="_blank">[http]</a><a href="http://featuremapper.org/files/TAOSD-AOM-2009/">[additional material]</a>
+
+These sources are the original sources. In particular, they have not been updated to work with the newest version of XText etc. They will likely need a lot of work to make them work with the newest versions of existing frameworks, but, unfortunately, I don't foresee having the time required in the near future. Feel free to fork and improve and please share back with a pull request.
